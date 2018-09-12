@@ -65,7 +65,11 @@ member :
     }
 
 value :
-    INT
+    object
+    {
+        $$ = Value{$1}
+    }
+    | INT
     {
         v, _ := strconv.ParseInt($1.literal, 10, 64)
         $$ = Value{v}

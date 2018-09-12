@@ -54,7 +54,7 @@ const yyEofCode = 1
 const yyErrCode = 2
 const yyInitialStackSize = 16
 
-//line parser.go.y:125
+//line parser.go.y:129
 
 //line yacctab:1
 var yyExca = [...]int{
@@ -65,46 +65,48 @@ var yyExca = [...]int{
 
 const yyPrivate = 57344
 
-const yyLast = 37
+const yyLast = 40
 
 var yyAct = [...]int{
 
-	13, 23, 8, 14, 15, 18, 16, 17, 20, 25,
-	10, 4, 24, 5, 12, 5, 1, 14, 15, 18,
-	16, 17, 20, 9, 27, 26, 28, 5, 21, 22,
-	10, 19, 3, 11, 6, 7, 2,
+	13, 24, 8, 15, 16, 19, 17, 18, 21, 4,
+	10, 1, 26, 5, 12, 25, 22, 23, 15, 16,
+	19, 17, 18, 21, 4, 28, 27, 29, 5, 4,
+	10, 20, 3, 5, 9, 7, 14, 2, 11, 6,
 }
 var yyPact = [...]int{
 
-	1, -1000, -1000, -1000, 24, -1, 17, -1000, -1000, -12,
-	-1000, -3, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
-	-1000, -1000, 4, 13, -1000, 13, -1000, -1000, -1000,
+	19, -1000, -1000, -1000, 24, -1, 5, -1000, -1000, -12,
+	-1000, 0, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
+	-1000, -1000, -1000, 4, 14, -1000, 14, -1000, -1000, -1000,
 }
 var yyPgo = [...]int{
 
-	0, 36, 34, 2, 0, 31, 33, 23, 16,
+	0, 36, 39, 2, 0, 31, 38, 34, 11,
 }
 var yyR1 = [...]int{
 
 	0, 8, 8, 1, 1, 2, 2, 3, 4, 4,
-	4, 4, 4, 4, 4, 5, 5, 6, 6, 7,
+	4, 4, 4, 4, 4, 4, 5, 5, 6, 6,
+	7,
 }
 var yyR2 = [...]int{
 
 	0, 1, 1, 3, 2, 1, 3, 3, 1, 1,
-	1, 1, 1, 1, 1, 3, 2, 1, 3, 1,
+	1, 1, 1, 1, 1, 1, 3, 2, 1, 3,
+	1,
 }
 var yyChk = [...]int{
 
 	-1000, -8, -1, -5, 10, 14, -2, 11, -3, -7,
-	6, -6, 15, -4, 4, 5, 7, 8, 6, -5,
-	9, 11, 12, 13, 15, 12, -3, -4, -4,
+	6, -6, 15, -4, -1, 4, 5, 7, 8, 6,
+	-5, 9, 11, 12, 13, 15, 12, -3, -4, -4,
 }
 var yyDef = [...]int{
 
 	0, -2, 1, 2, 0, 0, 0, 4, 5, 0,
-	19, 0, 16, 17, 8, 9, 10, 11, 12, 13,
-	14, 3, 0, 0, 15, 0, 6, 7, 18,
+	20, 0, 17, 18, 8, 9, 10, 11, 12, 13,
+	14, 15, 3, 0, 0, 16, 0, 6, 7, 19,
 }
 var yyTok1 = [...]int{
 
@@ -513,73 +515,79 @@ yydefault:
 		yyDollar = yyS[yypt-1 : yypt+1]
 		//line parser.go.y:69
 		{
-			v, _ := strconv.ParseInt(yyDollar[1].token.literal, 10, 64)
-			yyVAL.value = Value{v}
+			yyVAL.value = Value{yyDollar[1].object}
 		}
 	case 9:
 		yyDollar = yyS[yypt-1 : yypt+1]
-		//line parser.go.y:74
+		//line parser.go.y:73
 		{
-			v, _ := strconv.ParseFloat(yyDollar[1].token.literal, 64)
+			v, _ := strconv.ParseInt(yyDollar[1].token.literal, 10, 64)
 			yyVAL.value = Value{v}
 		}
 	case 10:
 		yyDollar = yyS[yypt-1 : yypt+1]
-		//line parser.go.y:79
+		//line parser.go.y:78
 		{
-			yyVAL.value = Value{true}
+			v, _ := strconv.ParseFloat(yyDollar[1].token.literal, 64)
+			yyVAL.value = Value{v}
 		}
 	case 11:
 		yyDollar = yyS[yypt-1 : yypt+1]
 		//line parser.go.y:83
 		{
-			yyVAL.value = Value{false}
+			yyVAL.value = Value{true}
 		}
 	case 12:
 		yyDollar = yyS[yypt-1 : yypt+1]
 		//line parser.go.y:87
 		{
-			yyVAL.value = Value{yyDollar[1].token.literal[1 : len(yyDollar[1].token.literal)-1]}
+			yyVAL.value = Value{false}
 		}
 	case 13:
 		yyDollar = yyS[yypt-1 : yypt+1]
 		//line parser.go.y:91
 		{
-			yyVAL.value = Value{yyDollar[1].array}
+			yyVAL.value = Value{yyDollar[1].token.literal[1 : len(yyDollar[1].token.literal)-1]}
 		}
 	case 14:
 		yyDollar = yyS[yypt-1 : yypt+1]
 		//line parser.go.y:95
 		{
-			yyVAL.value = Value{nil}
+			yyVAL.value = Value{yyDollar[1].array}
 		}
 	case 15:
+		yyDollar = yyS[yypt-1 : yypt+1]
+		//line parser.go.y:99
+		{
+			yyVAL.value = Value{nil}
+		}
+	case 16:
 		yyDollar = yyS[yypt-3 : yypt+1]
-		//line parser.go.y:101
+		//line parser.go.y:105
 		{
 			yyVAL.array = yyDollar[2].values
 		}
-	case 16:
+	case 17:
 		yyDollar = yyS[yypt-2 : yypt+1]
-		//line parser.go.y:105
+		//line parser.go.y:109
 		{
 			yyVAL.array = Array{}
 		}
-	case 17:
+	case 18:
 		yyDollar = yyS[yypt-1 : yypt+1]
-		//line parser.go.y:111
+		//line parser.go.y:115
 		{
 			yyVAL.values = []Value{yyDollar[1].value}
 		}
-	case 18:
+	case 19:
 		yyDollar = yyS[yypt-3 : yypt+1]
-		//line parser.go.y:115
+		//line parser.go.y:119
 		{
 			yyVAL.values = append(yyDollar[1].values, yyDollar[3].value)
 		}
-	case 19:
+	case 20:
 		yyDollar = yyS[yypt-1 : yypt+1]
-		//line parser.go.y:121
+		//line parser.go.y:125
 		{
 			yyVAL.string = yyDollar[1].token.literal[1 : len(yyDollar[1].token.literal)-1]
 		}

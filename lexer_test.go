@@ -48,6 +48,31 @@ func TestParseObject(t *testing.T) {
 				},
 			},
 		},
+		{
+			name: "nested object",
+			args: `{"a":1,"b":{"c":true}}`,
+			want: &Object{
+				members: []Member{
+					{
+						Key:   "a",
+						Value: Value{int64(1)},
+					},
+					{
+						Key: "b",
+						Value: Value{
+							Object{
+								members: []Member{
+									{
+										Key:   "c",
+										Value: Value{true},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -88,6 +113,37 @@ func TestParseArray(t *testing.T) {
 			want: Array{
 				Value{int64(0)},
 				Value{nil},
+			},
+		},
+		{
+			name: "object element",
+			args: `[0,{"a":1}]`,
+			want: Array{
+				Value{int64(0)},
+				Value{
+					Object{
+						members: []Member{
+							{
+								Key:   "a",
+								Value: Value{int64(1)},
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			name: "array element",
+			args: `[0,["a"]]`,
+			want: Array{
+				Value{int64(0)},
+				Value{
+					Array{
+						Value{
+							"a",
+						},
+					},
+				},
 			},
 		},
 	}
